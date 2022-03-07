@@ -1,0 +1,3 @@
+include ':httpLib'
+include ':app'
+rootProject.name = "httpDemo"
