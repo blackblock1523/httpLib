@@ -33,23 +33,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGet(View v) {
-        ThreadPoolManager.getInstance().execute(new Runnable() {
-            @Override
-            public void run() {
-                getRequest();
-            }
-        });
-
+        getRequest();
     }
 
     public void onPost(View v) {
-        ThreadPoolManager.getInstance().execute(new Runnable() {
-            @Override
-            public void run() {
-                postRequest();
-            }
-        });
-
+        postRequest();
     }
 
     private void postRequest() {

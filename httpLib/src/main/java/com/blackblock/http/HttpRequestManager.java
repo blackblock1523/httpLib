@@ -5,6 +5,7 @@ import com.blackblock.http.listener.IRequest;
 import com.blackblock.http.listener.IRequestListener;
 import com.blackblock.http.listener.IResultListener;
 import com.blackblock.http.model.Request;
+import com.blackblock.http.util.ThreadPoolManager;
 
 import static com.blackblock.http.model.Request.GET;
 
@@ -32,8 +33,13 @@ public class HttpRequestManager implements IRequestListener {
     @Override
     public void execute(Request request, IResultListener listener) {
         setRequest(request);
-        IRequest iRequest = RequestFactory.getInstance().CreateRequest(this.request, listener);
-        iRequest.execute();
+        final IRequest iRequest = RequestFactory.getInstance().CreateRequest(this.request, listener);
+        ThreadPoolManager.getInstance().execute(new Runnable() {
+            @Override
+            public void run() {
+                iRequest.execute();
+            }
+        });
     }
 
     private void setRequest(Request request) {
