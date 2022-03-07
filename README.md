@@ -22,7 +22,7 @@ dependencies {
 #### java:
 
 ```java
-		Request request = new Request.creator()
+	Request request = new Request.creator()
                 .setUrl(url)
                 .setMethod("GET") // GET or POST
                 .setEncode(true)
@@ -30,22 +30,20 @@ dependencies {
                 .setParams(map)
                 .create();
 
-		IResultListener listener = IResultListener getListener() {
-            return new IResultListener() {
-                @Override
-                public void onSuccess(Response response) {
-                    Log.e("http", "code: " + response.getCode());
-                    Log.e("http", "result: " + response.getResult());
-                }
+	IResultListener listener = new IResultListener() {
+            @Override
+            public void onSuccess(Response response) {
+                Log.e("http", "code: " + response.getCode());
+                Log.e("http", "result: " + response.getResult());
+            }
 
-                @Override
-                public void onFailed(Exception ex, Response response) {
-                    Log.e("http", "ex: " + ex.getMessage());
-                    Log.e("http", "code: " + response.getResult());
-                    Log.e("http", "result: " + response.getResult());
-                }
-            };
-    	}
+            @Override
+            public void onFailed(Exception ex, Response response) {
+                Log.e("http", "ex: " + ex.getMessage());
+                Log.e("http", "code: " + response.getResult());
+                Log.e("http", "result: " + response.getResult());
+            }
+        };
 
-        HttpRequestManager.getInstance().execute(request, listener);
+	HttpRequestManager.getInstance().execute(request, listener);
 ```
